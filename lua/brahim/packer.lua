@@ -3,13 +3,11 @@ vim.cmd.packadd('packer.nvim')
 return require('packer').startup(function(use)
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
-
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
 		-- or                            , branch = '0.1.x',
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
-	use('rose-pine/neovim')
 	use({'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'})
 	use('nvim-treesitter/playground')
 	use('theprimeagen/harpoon')
@@ -40,7 +38,6 @@ return require('packer').startup(function(use)
 	use("folke/zen-mode.nvim")
 	use("github/copilot.vim")
 	use'nvim-lualine/lualine.nvim'
-	use 'majutsushi/tagbar'
 	use 'b3nj5m1n/kommentary'
 	use {
 		'nvim-tree/nvim-tree.lua',
@@ -52,4 +49,12 @@ return require('packer').startup(function(use)
 	use {"akinsho/toggleterm.nvim", tag = '*', config = function()
 		require("toggleterm").setup()
 	end}
+	use 'nvim-tree/nvim-web-devicons'
+	use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
+	use '42Paris/42header'
+	use 'preservim/tagbar'
+	use 'abellaismail7/42header.nvim'
+	-- use 'majutsushi/tagbar'
+	use 'folke/tokyonight.nvim'
+}
 end)

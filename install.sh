@@ -1,7 +1,9 @@
 #!/bin/bash
 
+# check the home dir is there a bin dir if not make one
 [[ -d "$HOME/bin" ]] || mkdir "$HOME/bin"
 
+# check if you Already have nvim and if not download it 
 cd "$HOME/bin"
 FILE="nvim-macos.tar.gz"
 nvim --version > /dev/null 2>&1
@@ -17,6 +19,7 @@ tput setaf 2;
 echo "nvim [installed]"
 tput init;
 
+# does the same with clangd 
 FILE2="clangd-mac-14.0.3.zip"
 clangd --version > /dev/null 2>&1
 if [ $? -ne 0 ]; then
@@ -32,6 +35,7 @@ tput setaf 2;
 echo "clangd [installed]"
 tput init;
 
+# do the same with ripgrep
 FILE3="ripgrep-13.0.0-x86_64-apple-darwin.tar.gz"
 rg --version > /dev/null 2>&1
 if [ $? -ne 0 ]; then
@@ -47,6 +51,7 @@ tput setaf 2;
 echo "ripgrep [installed]"
 tput init;
 
+# downloading fd
 FILE4="fd-v8.4.0-x86_64-apple-darwin.tar.gz"
 fd --version > /dev/null 2>&1
 if [ $? -ne 0 ]; then
@@ -62,10 +67,13 @@ tput setaf 2;
 echo "fd [installed]"
 tput init;
 
+# add bin to PATH 
 echo $PATH | grep -E ":$HOME/bin[ /]*:" > /dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo "PATH+=':$HOME/bin'" >> "$HOME/.zshrc"
 	export PATH+=':$HOME/bin'
 fi
 
+# downloading packer which gonna help to install plugins 
+# !!!note you can you packer manager of your choice 
 git clone -q --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim 2> /dev/null && echo "Packer.nvim [installed]" || echo "Packer [Already exist]"

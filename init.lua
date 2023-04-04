@@ -1,2 +1,2 @@
-require("brahim")
+require("conf")
 require("packer")

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# check the home dir is there a bin dir if not make one
+# this line ensures that the $HOME/bin directory exists, and creates it if it does not.
+# and same for nvim and lua and after 
 [[ -d "$HOME/bin" ]] || mkdir "$HOME/bin"
 
 # check if you Already have nvim and if not download it 
@@ -75,5 +76,5 @@ if [ $? -ne 0 ]; then
 fi
 
 # downloading packer which gonna help to install plugins 
-# !!!note you can you packer manager of your choice 
+# !!!note you can download packer manager of your choice 
 git clone -q --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim 2> /dev/null && echo "Packer.nvim [installed]" || echo "Packer [Already exist]"

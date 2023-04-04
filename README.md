@@ -24,7 +24,7 @@ This repository contains a custom Neovim configuration, designed to optimize you
     ./install.sh
     ```
 
-4. Open Neovim and run `:PlugInstall` to install the plugins.
+4. Open Packer.lua and run `:so` then `:PackerSync` to install the plugins.
 
 5. Restart Neovim to apply the new configuration.
 

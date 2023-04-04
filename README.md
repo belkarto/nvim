@@ -43,11 +43,11 @@ This repository contains a custom Neovim configuration, designed to optimize you
 | <leader>,     | go to previous buffer                          |
 | <leader>.     | go to next buffer                              |
 | <C-\\>        | opens terminal                                 |
-| <F3>          | open nerd tree                                 |
+| < F3 >          | open nerd tree                                 |
 | <leader>gs    | opens Fugitve                                  |
 | <leader>a     | add file to harpoon quick menu                 |
-| <C-e>         | toggle harpoon quick menu                      |
-| <C-p>         | show telescop                                  |
+| < C-e>         | toggle harpoon quick menu                      |
+| < C-p>         | show telescop                                  |
 
 ### visual mode
 | key           | Action                                         |

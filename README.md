@@ -33,21 +33,21 @@ This repository contains a custom Neovim configuration, designed to optimize you
 ### Normal mode
 | key           | Action                                         |
 |---------------|------------------------------------------------|
-| <leader>u     | show undo tree to track your changes           |
-| <leader>s     | select word and change all matching words in the file|
-| <leader>ps    | look up a word ot text in all file in working directory|
-| <leader>pf    | look up a file in working directory            |
-| <leader>pv    | explore files                                  |
-| <leader>f     | fix file format                                |
-| <leader>n     | fix file indentation                           |
-| <leader>,     | go to previous buffer                          |
-| <leader>.     | go to next buffer                              |
-| <C-\\>        | opens terminal                                 |
-| < F3 >          | open nerd tree                                 |
-| <leader>gs    | opens Fugitve                                  |
-| <leader>a     | add file to harpoon quick menu                 |
-| < C-e>         | toggle harpoon quick menu                      |
-| < C-p>         | show telescop                                  |
+| \<leader\>u     | show undo tree to track your changes           |
+| \<leader\>s     | select word and change all matching words in the file|
+| \<leader\>ps    | look up a word ot text in all file in working directory|
+| \<leader\>pf    | look up a file in working directory            |
+| \<leader\>pv    | explore files                                  |
+| \<leader\>f     | fix file format                                |
+| \<leader\>n     | fix file indentation                           |
+| \<leader\>,     | go to previous buffer                          |
+| \<leader\>.     | go to next buffer                              |
+| \<C-\\>        | opens terminal                                 |
+| \<F3\>          | open nerd tree                                 |
+| \<leader\>gs    | opens Fugitve                                  |
+| \<leader\>a     | add file to harpoon quick menu                 |
+| \<C-e\>         | toggle harpoon quick menu                      |
+| \<C-p\>         | show telescop                                  |
 
 ### visual mode
 | key           | Action                                         |

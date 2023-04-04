@@ -55,7 +55,12 @@ This repository contains a custom Neovim configuration, designed to optimize you
 | J             | move selected text down                        |
 | K             | move selected text up                          |
 
-
+## Quick look from the inside
+<p align="center">
+	<img src="https://github.com/belkarto/nvim/blob/main/IMG/nvim_shot1.png"/>
+  <img src="https://github.com/belkarto/nvim/blob/main/IMG/nvim_shot_2.png"/>
+  <img src="https://github.com/belkarto/nvim/blob/main/IMG/nvim_shot3.png"/>
+</p>
 ## Feedback and Contributions
 
 If you have any suggestions, issues, or improvements, please open an issue or submit a pull request. Your contributions are welcome and appreciated!

@@ -12,7 +12,6 @@ return require('packer').startup(function(use)
 	use('nvim-treesitter/playground')
 	use('theprimeagen/harpoon')
 	use('mbbill/undotree')
-	use('tpope/vim-fugitive')
 	use {
 		'VonHeikemen/lsp-zero.nvim',
 		requires = {
@@ -51,10 +50,14 @@ return require('packer').startup(function(use)
 	end}
 	use 'nvim-tree/nvim-web-devicons'
 	use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
-	use '42Paris/42header'
 	use 'preservim/tagbar'
-	use 'abellaismail7/42header.nvim'
-	-- use 'majutsushi/tagbar'
+
+	-- colorscheme
 	use 'folke/tokyonight.nvim'
-}
+	use 'oxfist/night-owl.nvim'
+	
+	-- Git
+	use 'tpope/vim-fugitive' 
+	use 'lewis6991/gitsigns.nvim'
+
 end)

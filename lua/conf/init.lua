@@ -2,7 +2,7 @@ require("conf.remap")
 require("conf.set")
 
 
---[[ vim.cmd('colorscheme nightfly')
+vim.cmd('colorscheme night-owl')
 
 require("nvim-tree").setup()
 require("mason").setup{
@@ -10,4 +10,4 @@ require("mason").setup{
 		"mason.providers.client",
 		"mason.providers.registry-api",
 	}
-} ]]
+}

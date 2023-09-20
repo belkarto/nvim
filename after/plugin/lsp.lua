@@ -2,9 +2,9 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
-lsp.ensure_installed({
+--[[ lsp.ensure_installed({
   'clangd',
-})
+}) ]]
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
@@ -20,9 +20,9 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
-lsp.setup_nvim_cmp({
+--[[ lsp.setup_nvim_cp({
   mapping = cmp_mappings
-})
+}) ]]
 
 lsp.set_preferences({
 	suggest_lsp_servers = true,

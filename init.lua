@@ -1,2 +1,5 @@
-require("conf")
-require("packer")
+require("user.set")
+require("user.remap")
+require("user.plugins")
+require("user.colorscheme")
+require("user.cmp")

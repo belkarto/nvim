@@ -72,3 +72,5 @@ keymap("n", "<C-f>", "<cmd>Twilight<cr>", opts)
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
+-- clear all search highlight
+keymap("n", "<leader>c", "<cmd>noh<cr>", opts)

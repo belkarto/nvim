@@ -54,7 +54,8 @@ return packer.startup(function(use)
     use 'xiyaowong/transparent.nvim'
     use 'folke/twilight.nvim' -- toggle focus on chunk of code
     use 'nvim-lualine/lualine.nvim'
-    use 'morhetz/gruvbox'
+    --[[ use 'morhetz/gruvbox'  ]]
+    use '/ellisonleao/gruvbox.nvim'
     use 'Skullamortis/forest.nvim'
     use 'zSnails/cityscape.nvim'
     --use 'sunjon/shade.nvim' --remove it for the moment conflict with transparent plugins

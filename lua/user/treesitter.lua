@@ -1,4 +1,4 @@
-local configs = require("nvim-treesitter.configs")
+local configs = require('ts_context_commentstring')
 configs.setup {
     ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "cpp" },
     sync_install = false,

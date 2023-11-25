@@ -1,2 +1,8 @@
 BasedOnStyle: Microsoft
 IndentWidth: 4
+
+AlignConsecutiveMacros:
+  Enabled: true
+  AcrossEmptyLines: true
+  AcrossComments: false
+AlignConsecutiveDeclarations: true

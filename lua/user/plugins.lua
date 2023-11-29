@@ -54,7 +54,6 @@ return packer.startup(function(use)
     use 'xiyaowong/transparent.nvim'
     use 'folke/twilight.nvim' -- toggle focus on chunk of code
     use 'nvim-lualine/lualine.nvim'
-    --[[ use 'morhetz/gruvbox'  ]]
     use 'ellisonleao/gruvbox.nvim'
     use 'Skullamortis/forest.nvim'
     use 'zSnails/cityscape.nvim'
@@ -126,8 +125,8 @@ return packer.startup(function(use)
     -- terminal
     use 'akinsho/toggleterm.nvim'
 
-    --note taking withen neovim
-    use 'serenevoid/kiwi.nvim'
+    -- horizontal line
+    use '/lukas-reineke/indent-blankline.nvim'
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if PACKER_BOOTSTRAP then

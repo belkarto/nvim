@@ -57,6 +57,10 @@ return packer.startup(function(use)
     use 'ellisonleao/gruvbox.nvim'
     use 'Skullamortis/forest.nvim'
     use 'zSnails/cityscape.nvim'
+    use {
+        'RRethy/vim-hexokinase',
+        run = 'make hexokinase'
+    }
     --use 'sunjon/shade.nvim' --remove it for the moment conflict with transparent plugins
 
 
@@ -127,6 +131,13 @@ return packer.startup(function(use)
 
     -- horizontal line
     use '/lukas-reineke/indent-blankline.nvim'
+    use '/github/copilot.vim'
+    
+
+    -- debuger plugins
+    --[[ use 'mfussenegger/nvim-dap' ]]
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use 'ldelossa/nvim-dap-projects'
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if PACKER_BOOTSTRAP then

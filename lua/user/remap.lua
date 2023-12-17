@@ -1,6 +1,6 @@
 local opts = { noremap = true, silent = true }
 
-local term_opts = { silent = true }
+--[[ local term_opts = { silent = true } ]]
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
@@ -74,3 +74,4 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- clear all search highlight
 keymap("n", "<leader>c", "<cmd>noh<cr>", opts)
+vim.keymap.set("n", "<leader>t", vim.cmd.TransparentToggle)

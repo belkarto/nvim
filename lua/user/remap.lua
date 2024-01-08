@@ -75,3 +75,5 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 -- clear all search highlight
 keymap("n", "<leader>c", "<cmd>noh<cr>", opts)
 vim.keymap.set("n", "<leader>t", vim.cmd.TransparentToggle)
+
+vim.keymap.set("n", "<leader>dd", "<cmd>packadd termdebug<cr><cmd>Termdebug<cr><C-w>k<C-w>k<C-w>L<C-w>h<C-w>j", opts)

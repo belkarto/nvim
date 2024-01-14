@@ -48,10 +48,10 @@ require'barbar'.setup {
     button = '',
     -- Enables / disables diagnostic symbols
     diagnostics = {
-      [vim.diagnostic.severity.ERROR] = {enabled = true, icon = 'ﬀ'},
-      [vim.diagnostic.severity.WARN] = {enabled = false},
-      [vim.diagnostic.severity.INFO] = {enabled = false},
-      [vim.diagnostic.severity.HINT] = {enabled = true},
+      [vim.diagnostic.severity.ERROR] = {enabled = true, icon = ""},
+      [vim.diagnostic.severity.WARN] = {enabled = false, icon = ""},
+      [vim.diagnostic.severity.INFO] = {enabled = false, icon = ""},
+      [vim.diagnostic.severity.HINT] = {enabled = true}, icon = "",
     },
     gitsigns = {
       added = {enabled = false, icon = '+'},

@@ -1,34 +1,133 @@
-local status_ok, bufferline = pcall(require, "bufferline")
-if not status_ok then
-  return
-end
+vim.g.barbar_auto_setup = false -- disable auto-setup
 
-bufferline.setup {
-  options = {
-    numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-    close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-    right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-    left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-    middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
-    indicator_icon = "▎",
-    buffer_close_icon = "",
-    modified_icon = "●",
-    close_icon = "",
-    left_trunc_marker = "",
-    right_trunc_marker = "",
-    max_name_length = 30,
-    max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
-    tab_size = 17,
-    diagnostics = false, -- | "nvim_lsp" | "coc",
-    diagnostics_update_in_insert = false,
-    offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
-    show_buffer_icons = true,
-    show_buffer_close_icons = true,
-    show_close_icon = true,
-    show_tab_indicators = true,
-    persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-    separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
-    enforce_regular_tabs = true,
-    always_show_bufferline = true,
+require'barbar'.setup {
+  -- WARN: do not copy everything below into your config!
+  --       It is just an example of what configuration options there are.
+  --       The defaults are suitable for most people.
+
+  -- Enable/disable animations
+  animation = true,
+
+  -- Automatically hide the tabline when there are this many buffers left.
+  -- Set to any value >=0 to enable.
+  auto_hide = false,
+
+  -- Enable/disable current/total tabpages indicator (top right corner)
+  tabpages = true,
+
+  -- Enables/disable clickable tabs
+  --  - left-click: go to buffer
+  --  - middle-click: delete buffer
+  clickable = true,
+
+  -- Excludes buffers from the tabline
+  -- exclude_ft = {'javascript'},
+  -- exclude_name = {'package.json'},
+
+  -- A buffer to this direction will be focused (if it exists) when closing the current buffer.
+  -- Valid options are 'left' (the default), 'previous', and 'right'
+  focus_on_close = 'left',
+
+  -- Hide inactive buffers and file extensions. Other options are `alternate`, `current`, and `visible`.
+  hide = {extensions = true, inactive = false},
+
+  -- Disable highlighting alternate buffers
+  highlight_alternate = false,
+
+  -- Disable highlighting file icons in inactive buffers
+  highlight_inactive_file_icons = false,
+
+  -- Enable highlighting visible buffers
+  highlight_visible = true,
+
+  icons = {
+    -- Configure the base icons on the bufferline.
+    -- Valid options to display the buffer index and -number are `true`, 'superscript' and 'subscript'
+    buffer_index = false,
+    buffer_number = false,
+    button = '',
+    -- Enables / disables diagnostic symbols
+    diagnostics = {
+      [vim.diagnostic.severity.ERROR] = {enabled = true, icon = 'ﬀ'},
+      [vim.diagnostic.severity.WARN] = {enabled = false},
+      [vim.diagnostic.severity.INFO] = {enabled = false},
+      [vim.diagnostic.severity.HINT] = {enabled = true},
+    },
+    gitsigns = {
+      added = {enabled = false, icon = '+'},
+      changed = {enabled = false, icon = '~'},
+      deleted = {enabled = false, icon = '-'},
+    },
+    filetype = {
+      -- Sets the icon's highlight group.
+      -- If false, will use nvim-web-devicons colors
+      custom_colors = false,
+
+      -- Requires `nvim-web-devicons` if `true`
+      enabled = true,
+    },
+    separator = {left = '▎', right = ''},
+
+    -- If true, add an additional separator at the end of the buffer list
+    separator_at_end = true,
+
+    -- Configure the icons on the bufferline when modified or pinned.
+-- Supports all the base icon options.
+    modified = {button = '●'},
+    pinned = {button = '', filename = true},
+
+    -- Use a preconfigured buffer appearance— can be 'default', 'powerline', or 'slanted'
+    preset = 'default',
+
+    -- Configure the icons on the bufferline based on the visibility of a buffer.
+    -- Supports all the base icon options, plus `modified` and `pinned`.
+    alternate = {filetype = {enabled = false}},
+    current = {buffer_index = true},
+    inactive = {button = '×'},
+    visible = {modified = {buffer_number = false}},
   },
+
+  -- If true, new buffers will be inserted at the start/end of the list.
+  -- Default is to insert after current buffer.
+  insert_at_end = true,
+  insert_at_start = false,
+
+  -- Sets the maximum padding width with which to surround each tab
+  maximum_padding = 1,
+
+  -- Sets the minimum padding width with which to surround each tab
+  minimum_padding = 1,
+
+  -- Sets the maximum buffer name length.
+  maximum_length = 30,
+
+  -- Sets the minimum buffer name length.
+  minimum_length = 0,
+
+  -- If set, the letters for each buffer in buffer-pick mode will be
+  -- assigned based on their name. Otherwise or in case all letters are
+  -- already assigned, the behavior is to assign letters in order of
+  -- usability (see order below)
+  semantic_letters = true,
+
+  -- Set the filetypes which barbar will offset itself for
+  sidebar_filetypes = {
+    -- Use the default values: {event = 'BufWinLeave', text = nil}
+    NvimTree = true,
+    -- Or, specify the text used for the offset:
+    undotree = {text = 'undotree'},
+    -- Or, specify the event which the sidebar executes when leaving:
+    ['neo-tree'] = {event = 'BufWipeout'},
+    -- Or, specify both
+    Outline = {event = 'BufWinLeave', text = 'symbols-outline'},
+  },
+
+  -- New buffer letters are assigned in this order. This order is
+  -- optimal for the qwerty keyboard layout but might need adjustment
+  -- for other layouts.
+  letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
+
+  -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
+  -- where X is the buffer number. But only a static string is accepted here.
+  no_name_title = nil,
 }

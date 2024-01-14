@@ -124,7 +124,7 @@ return packer.startup(function(use)
     use 'mbbill/undotree'
 
     --buffer line in top of window
-    use 'akinsho/bufferline.nvim'
+    use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
 
     -- terminal
     use 'akinsho/toggleterm.nvim'

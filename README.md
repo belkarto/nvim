@@ -40,10 +40,11 @@ This repository contains a custom Neovim configuration, designed to optimize you
 | \<leader\>pv    | explore files                                  |
 | \<leader\>f     | fix file format                                |
 | \<leader\>n     | fix file indentation                           |
-| \<leader\>,     | go to previous buffer                          |
-| \<leader\>.     | go to next buffer                              |
+| \<alt\>,     | go to previous buffer                          |
+| \<alt\>.     | go to next buffer                              |
+| \<alt\>c     | close current buffer                              |
 | \<C-\\>        | opens terminal                                 |
-| \<F3\>          | open nerd tree                                 |
+| \<leader\>e         | open nerd tree                                 |
 | \<leader\>gs    | opens Fugitve                                  |
 | \<leader\>a     | add file to harpoon quick menu                 |
 | \<C-e\>         | toggle harpoon quick menu                      |

@@ -132,7 +132,7 @@ return packer.startup(function(use)
     -- horizontal line
     use '/lukas-reineke/indent-blankline.nvim'
     use '/github/copilot.vim'
-    
+    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
     -- debuger plugins
     --[[ use 'mfussenegger/nvim-dap' ]]

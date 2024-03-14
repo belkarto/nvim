@@ -5,7 +5,7 @@
 [[ -d "$HOME/bin" ]] || mkdir "$HOME/bin"
 
 # check if you Already have nvim and if not download it 
-if [[ "$OSTYPE" == "darwin" ]]; then
+if [[ $(uname) == "Darwin" ]]; then
 	cd "$HOME/bin"
 	FILE="nvim-macos.tar.gz"
 	nvim --version > /dev/null 2>&1

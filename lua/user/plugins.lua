@@ -61,17 +61,11 @@ return packer.startup(function(use)
         'RRethy/vim-hexokinase',
         run = 'make hexokinase'
     }
-    --use 'sunjon/shade.nvim' --remove it for the moment conflict with transparent plugins
 
 
 
     --LSP
-    use "neovim/nvim-lspconfig"             -- enable LSP
-    use "williamboman/mason.nvim"           -- simple to use language server installer
-    use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
     use 'jose-elias-alvarez/null-ls.nvim'   -- LSP diagnostics and code actions
-
-
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
@@ -131,13 +125,17 @@ return packer.startup(function(use)
 
     -- horizontal line
     use '/lukas-reineke/indent-blankline.nvim'
-    use '/github/copilot.vim'
     use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+
+    -- AI plugins
+    use '/github/copilot.vim'
 
     -- debuger plugins
     --[[ use 'mfussenegger/nvim-dap' ]]
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-    use 'ldelossa/nvim-dap-projects'
+    -- use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    -- use 'ldelossa/nvim-dap-projects'
+
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if PACKER_BOOTSTRAP then

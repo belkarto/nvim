@@ -32,6 +32,11 @@ local settings = {
 
 local servers = {
     "lua_ls",
+    "clangd",
+    "ast_grep",
+    "biome",
+    "tsserver",
+    "eslint",
 }
 
 require('mason').setup(settings)

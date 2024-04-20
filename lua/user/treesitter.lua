@@ -1,6 +1,8 @@
 local configs = require('ts_context_commentstring')
+
+
 configs.setup {
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "cpp" },
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "cpp", "javascript" },
     sync_install = false,
     auto_install = true,
     ignore_install = { "" }, -- List of parsers to ignore installing

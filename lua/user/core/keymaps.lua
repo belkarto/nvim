@@ -33,25 +33,6 @@ keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- -- Move to previous/next
--- keymap("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
--- keymap("n", "<A-.>", "<Cmd>BufferNext<CR>", opts)
--- -- Goto buffer in position...
--- keymap("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", opts)
--- keymap("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", opts)
--- keymap("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", opts)
--- keymap("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", opts)
--- keymap("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", opts)
--- keymap("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", opts)
--- keymap("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", opts)
--- keymap("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", opts)
--- keymap("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", opts)
--- keymap("n", "<A-0>", "<Cmd>BufferLast<CR>", opts)
--- -- Pin/unpin buffer
--- keymap("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)
--- -- Close buffer
--- keymap("n", "<A-c>", "<Cmd>BufferClose<CR>", opts)
-
 -- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
@@ -80,9 +61,6 @@ keymap(
 	opts
 )
 keymap("n", "<leader>ps", "<cmd>Telescope live_grep<cr>", opts)
--- format file
-vim.keymap.set("n", "<leader>f", "<cmd>LspZeroFormat<cr>")
---toggle twilight to focus only in current function or scoop
 
 -- find all matching words and replace them
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

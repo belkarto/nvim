@@ -70,6 +70,20 @@ if [[ $(uname) == "Darwin" ]]; then
 	tput setaf 2;
 	echo "fd [installed]"
 	tput init;
+
+	# downloading lazygit
+	FILE5="lazygit_0.41.0_Darwin_x86_64.tar.gz"
+	fd --version > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		echo "downloading lazygit"
+		curl -# -OL "https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Darwin_x86_64.tar.gz" 
+		tar xzf $FILE5
+		rm $FILE5
+	fi
+
+	tput setaf 2;
+	echo "LazyGit [installed]"
+	tput init;
 else
 	cd "$HOME/bin"
 	FILE="nvim-linux64.tar.gz"
@@ -132,6 +146,20 @@ else
 
 	tput setaf 2;
 	echo "fd [installed]"
+	tput init;
+
+	# downloading lazygit
+	FILE5="lazygit_0.41.0_Linux_x86_64.tar.gz"
+	lazygit --version > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		echo "downloading LazyGit"
+		curl -# -OL "https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Linux_x86_64.tar.gz" 
+		tar xzf $FILE5
+		rm $FILE5
+	fi
+
+	tput setaf 2;
+	echo "LazyGit [installed]"
 	tput init;
 fi
 

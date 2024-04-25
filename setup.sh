@@ -73,7 +73,7 @@ if [[ $(uname) == "Darwin" ]]; then
 
 	# downloading lazygit
 	FILE5="lazygit_0.41.0_Darwin_x86_64.tar.gz"
-	fd --version > /dev/null 2>&1
+	lazygit --version > /dev/null 2>&1
 	if [ $? -ne 0 ]; then
 		echo "downloading lazygit"
 		curl -# -OL "https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Darwin_x86_64.tar.gz" 

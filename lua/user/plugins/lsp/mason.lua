@@ -38,8 +38,8 @@ return {
 				"pyright",
 				"clangd",
 				"ast_grep",
-				"biome",
-				"eslint",
+				-- "biome",
+				-- "eslint",
 			},
 		})
 
@@ -49,8 +49,7 @@ return {
 				"stylua", -- lua formatter
 				"isort", -- python formatter
 				"black", -- python formatter
-				"pylint",
-				"eslint_d",
+				"ruff",
 			},
 		})
 	end,

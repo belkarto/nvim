@@ -60,6 +60,7 @@ keymap(
 	"<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
 	opts
 )
+keymap("n", "<leader>tc", "<cmd>lua require'telescope.builtin'.colorscheme({enable_preview = true})<cr>", opts)
 keymap("n", "<leader>ps", "<cmd>Telescope live_grep<cr>", opts)
 
 -- find all matching words and replace them

@@ -39,4 +39,8 @@ return {
 		end,
 		opts = {},
 	},
+	{
+		-- INFO: noice
+		"MunifTanjim/nui.nvim",
+	},
 }

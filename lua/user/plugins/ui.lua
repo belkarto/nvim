@@ -21,8 +21,9 @@
 -- nvim-ufo         | make Neovim's fold look modern and keep high performance.        |
 -- todo-comments    | Highlight, list and search todo comments in your projects        |
 -- toggleterm       | lua plugin to help easily manage multiple terminal windows       |
--- treesitter       |  Nvim Treesitter configurations and abstraction layer            |
---                  |                                                                  |
+-- treesitter       | Nvim Treesitter configurations and abstraction layer             |
+-- notify           | A fancy, configurable, notification manager for NeoVim           |
+-- noice_nvim       | replaces the UI for messages, cmdline and the popupmenu.         |
 --_____________________________________________________________________________________|
 
 local function colorscheme()
@@ -712,13 +713,14 @@ local function telescope()
 					},
 				},
 				-- pickers = {
-				-- Default configuration for builtin pickers goes here:
-				-- picker_name = {
-				--   picker_config_key = value,
-				--   ...
-				-- }
-				-- Now the picker_config_key will be applied every time you call this
-				-- builtin picker
+				-- 	colorscheme = {
+				-- 		enable_preview = true,
+				-- 	},
+				-- },
+				-- pickers = {
+				-- 	find_files = {
+				-- 		theme = "dropdown",
+				-- 	},
 				-- },
 				extensions = {
 					media_files = {
@@ -727,11 +729,6 @@ local function telescope()
 						filetypes = { "png", "webp", "jpg", "jpeg", "ttf" },
 						find_cmd = "rg", -- find command (defaults to `fd`)
 					},
-					-- Your extension configuration goes here:
-					-- extension_name = {
-					--   extension_config_key = value,
-					-- }
-					-- please take a look at the readme of the extension you want to configure
 				},
 			})
 		end,
@@ -968,22 +965,66 @@ local function treesitter()
 			-- event = "LazyFile",
 			enabled = true,
 			opts = { mode = "cursor", max_lines = 3 },
-			keys = {
-				{
-					"<leader>ut",
-					function()
-						local tsc = require("treesitter-context")
-						tsc.toggle()
-						if LazyVim.inject.get_upvalue(tsc.toggle, "enabled") then
-							LazyVim.info("Enabled Treesitter Context", { title = "Option" })
-						else
-							LazyVim.warn("Disabled Treesitter Context", { title = "Option" })
-						end
-					end,
-					desc = "Toggle Treesitter Context",
-				},
+		},
+	}
+end
+
+local function notify()
+	return {
+		"rcarriga/nvim-notify",
+		keys = {
+			{
+				"<leader>un",
+				function()
+					require("notify").dismiss({ silent = true, pending = true })
+				end,
+				desc = "",
 			},
 		},
+		opts = {
+			stages = "static",
+			timeout = 3000,
+			max_height = function()
+				return math.floor(vim.o.lines * 0.75)
+			end,
+			max_width = function()
+				return math.floor(vim.o.columns * 0.75)
+			end,
+			on_open = function(win)
+				vim.api.nvim_win_set_config(win, { zindex = 100 })
+			end,
+		},
+		init = function()
+			vim.notify = require("notify")
+		end,
+	}
+end
+
+local function noice_nvim()
+	-- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu.
+	return {
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("noice").setup({
+				lsp = {
+					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+					override = {
+						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+						["vim.lsp.util.stylize_markdown"] = true,
+						["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+					},
+				},
+				-- you can enable a preset for easier configuration
+				presets = {
+					bottom_search = true, -- use a classic bottom cmdline for search
+					command_palette = true, -- position the cmdline and popupmenu together
+					long_message_to_split = true, -- long messages will be sent to a split
+					inc_rename = false, -- enables an input dialog for inc-rename.nvim
+					lsp_doc_border = false, -- add a border to hover docs and signature help
+				},
+			})
+		end,
 	}
 end
 
@@ -1002,4 +1043,6 @@ return {
 	todo_comments(),
 	togleterm(),
 	treesitter(),
+	notify(),
+	noice_nvim(),
 }

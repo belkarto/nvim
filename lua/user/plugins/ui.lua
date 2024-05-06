@@ -15,8 +15,13 @@
 -- dressing         | improve the default vim.ui interfaces                            |
 -- indent-blankline | adds indentation guides                                          |
 -- mini.indentscope | ustomizable debounce delay, animation style                      |
---                  |                                                                  |
---                  |                                                                  |
+-- nvim-tree        | A File Explorer For Neovim Written In Lua                        |
+-- telescope        | Find, Filter, Preview, Pick. All lua, all the time.              |
+-- web_devicons     | Adds file type icons                                             |
+-- nvim-ufo         | make Neovim's fold look modern and keep high performance.        |
+-- todo-comments    | Highlight, list and search todo comments in your projects        |
+-- toggleterm       | lua plugin to help easily manage multiple terminal windows       |
+-- treesitter       |  Nvim Treesitter configurations and abstraction layer            |
 --                  |                                                                  |
 --_____________________________________________________________________________________|
 
@@ -562,6 +567,426 @@ local function indentation()
 	}
 end
 
+local function nvimTree()
+	return {
+		"nvim-tree/nvim-tree.lua",
+		config = function()
+			local nvimtree = require("nvim-tree")
+
+			-- recommended settings from nvim-tree documentation
+			vim.g.loaded_netrw = 1
+			vim.g.loaded_netrwPlugin = 1
+
+			nvimtree.setup({
+				view = {
+					width = 30,
+					relativenumber = true,
+				},
+				-- change folder arrow icons
+				renderer = {
+					indent_markers = {
+						enable = true,
+					},
+					icons = {
+						glyphs = {
+							folder = {
+								arrow_closed = "", -- arrow when folder is closed
+								arrow_open = "", -- arrow when folder is open
+							},
+						},
+					},
+				},
+				-- disable window_picker for
+				-- explorer to work well with
+				-- window splits
+				actions = {
+					open_file = {
+						window_picker = {
+							enable = false,
+						},
+					},
+				},
+				filters = {
+					custom = { ".DS_Store" },
+				},
+				git = {
+					ignore = false,
+				},
+			})
+
+			-- set keymaps
+			local keymap = vim.keymap -- for conciseness
+
+			keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
+			keymap.set(
+				"n",
+				"<leader>ef",
+				"<cmd>NvimTreeFindFileToggle<CR>",
+				{ desc = "Toggle file explorer on current file" }
+			) -- toggle file explorer on current file
+			keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" }) -- collapse file explorer
+			keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
+		end,
+	}
+end
+
+local function telescope()
+	return {
+		"nvim-telescope/telescope.nvim",
+		branch = "0.1.x",
+		config = function()
+			local telescope = require("telescope")
+			local actions = require("telescope.actions")
+			-- telescope.load_extension('media_files')
+
+			telescope.setup({
+				defaults = {
+
+					prompt_prefix = " ",
+					selection_caret = " ",
+					path_display = { "smart" },
+
+					mappings = {
+						i = {
+							["<C-n>"] = actions.cycle_history_next,
+							["<C-p>"] = actions.cycle_history_prev,
+
+							["<C-j>"] = actions.move_selection_next,
+							["<C-k>"] = actions.move_selection_previous,
+
+							["<C-c>"] = actions.close,
+
+							["<Down>"] = actions.move_selection_next,
+							["<Up>"] = actions.move_selection_previous,
+
+							["<CR>"] = actions.select_default,
+							["<C-x>"] = actions.select_horizontal,
+							["<C-v>"] = actions.select_vertical,
+							["<C-t>"] = actions.select_tab,
+
+							["<C-u>"] = actions.preview_scrolling_up,
+							["<C-d>"] = actions.preview_scrolling_down,
+
+							["<PageUp>"] = actions.results_scrolling_up,
+							["<PageDown>"] = actions.results_scrolling_down,
+
+							["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+							["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+							["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+							["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+							["<C-l>"] = actions.complete_tag,
+							["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+						},
+
+						n = {
+							["<esc>"] = actions.close,
+							["<CR>"] = actions.select_default,
+							["<C-x>"] = actions.select_horizontal,
+							["<C-v>"] = actions.select_vertical,
+							["<C-t>"] = actions.select_tab,
+
+							["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+							["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+							["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+							["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+
+							["j"] = actions.move_selection_next,
+							["k"] = actions.move_selection_previous,
+							["H"] = actions.move_to_top,
+							["M"] = actions.move_to_middle,
+							["L"] = actions.move_to_bottom,
+
+							["<Down>"] = actions.move_selection_next,
+							["<Up>"] = actions.move_selection_previous,
+							["gg"] = actions.move_to_top,
+							["G"] = actions.move_to_bottom,
+
+							["<C-u>"] = actions.preview_scrolling_up,
+							["<C-d>"] = actions.preview_scrolling_down,
+
+							["<PageUp>"] = actions.results_scrolling_up,
+							["<PageDown>"] = actions.results_scrolling_down,
+
+							["?"] = actions.which_key,
+						},
+					},
+				},
+				-- pickers = {
+				-- Default configuration for builtin pickers goes here:
+				-- picker_name = {
+				--   picker_config_key = value,
+				--   ...
+				-- }
+				-- Now the picker_config_key will be applied every time you call this
+				-- builtin picker
+				-- },
+				extensions = {
+					media_files = {
+						-- filetypes whitelist
+						-- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+						filetypes = { "png", "webp", "jpg", "jpeg", "ttf" },
+						find_cmd = "rg", -- find command (defaults to `fd`)
+					},
+					-- Your extension configuration goes here:
+					-- extension_name = {
+					--   extension_config_key = value,
+					-- }
+					-- please take a look at the readme of the extension you want to configure
+				},
+			})
+		end,
+	}
+end
+
+local function web_devicons()
+	return {
+		"nvim-tree/nvim-web-devicons",
+		config = function()
+			require("nvim-web-devicons").setup({
+				-- your personnal icons can go here (to override)
+				-- you can specify color or cterm_color instead of specifying both of them
+				-- DevIcon will be appended to `name`
+				override = {
+					zsh = {
+						icon = "",
+						color = "#428850",
+						cterm_color = "65",
+						name = "Zsh",
+					},
+					[".config"] = {
+						icon = "󱂀",
+						color = "#f1502f",
+						name = "Config",
+					},
+				},
+				-- globally enable different highlight colors per icon (default to true)
+				-- if set to false all icons will have the default icon's color
+				color_icons = true,
+				-- globally enable default icons (default to false)
+				-- will get overriden by `get_icons` option
+				default = true,
+				-- globally enable "strict" selection of icons - icon will be looked up in
+				-- different tables, first by filename, and if not found by extension; this
+				-- prevents cases when file doesn't have any extension but still gets some icon
+				-- because its name happened to match some extension (default to false)
+				strict = true,
+				-- same as `override` but specifically for overrides by filename
+				-- takes effect when `strict` is true
+				override_by_filename = {
+					[".gitignore"] = {
+						icon = "",
+						color = "#f1502f",
+						name = "Gitignore",
+					},
+					[".config/"] = {
+						icon = "󱂀",
+						color = "#f1502f",
+						name = "src",
+					},
+				},
+				-- same as `override` but specifically for overrides by extension
+				-- takes effect when `strict` is true
+				override_by_extension = {
+					["log"] = {
+						icon = "",
+						color = "#81e043",
+						name = "Log",
+					},
+					["js"] = {
+						icon = "",
+						color = "#cccc00",
+						name = "JS",
+					},
+				},
+				-- same as `override` but specifically for operating system
+				-- takes effect when `strict` is true
+				override_by_operating_system = {
+					["apple"] = {
+						icon = "",
+						color = "#A2AAAD",
+						cterm_color = "248",
+						name = "Apple",
+					},
+				},
+			})
+		end,
+	}
+end
+
+local function ufo()
+	return {
+		"kevinhwang91/nvim-ufo",
+		config = function()
+			vim.o.foldcolumn = "1" -- '0' is not bad
+			vim.o.foldlevel = 1 -- Using ufo provider need a large value, feel free to decrease the value
+			vim.o.foldlevelstart = 99
+			vim.o.foldenable = true
+
+			local status_ok, ufo = pcall(require, "ufo")
+			if not status_ok then
+				return
+			end
+
+			ufo.setup({})
+			vim.keymap.set("n", "<leader>z", require("ufo").openAllFolds)
+			vim.keymap.set("n", "<leader>m", require("ufo").closeAllFolds)
+			vim.keymap.set("n", "L", function()
+				local winid = require("ufo").peekFoldedLinesUnderCursor()
+				if not winid then
+					-- choose one of coc.nvim and nvim lsp
+					vim.fn.CocActionAsync("definitionHover") -- coc.nvim
+					vim.lsp.buf.hover()
+				end
+			end)
+		end,
+	}
+end
+
+local function todo_comments()
+	return {
+		"folke/todo-comments.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			local todo_comments = require("todo-comments")
+
+			local keymap = vim.keymap -- for conciseness
+
+			keymap.set("n", "]t", function()
+				todo_comments.jump_next()
+			end, { desc = "Next todo comment" })
+
+			keymap.set("n", "[t", function()
+				todo_comments.jump_prev()
+			end, { desc = "Previous todo comment" })
+
+			keymap.set("n", "<leader>t", "<cmd>:TodoTelescope<cr>", { desc = "Previous todo comment" })
+			todo_comments.setup()
+		end,
+	}
+end
+
+local function togleterm()
+	return {
+		"akinsho/toggleterm.nvim",
+		config = function()
+			require("toggleterm").setup({
+				-- size can be a number or function which is passed the current terminal
+				size = 10,
+				open_mapping = [[<c-\>]],
+				hide_numbers = true, -- hide the number column in toggleterm buffers
+				shade_filetypes = {},
+				autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
+				shade_terminals = true, -- NOTE: this option takes priority over highlights specified so if you specify Normal highlights you should set this to false
+				shading_factor = 1, -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+				start_in_insert = true,
+				insert_mappings = true, -- whether or not the open mapping applies in insert mode
+				persist_size = true,
+				winblend = 0,
+				direction = "horizontal", --'float', --'horizontal',
+				close_on_exit = true, -- close the terminal window when the process exits
+				shell = vim.o.shell, -- change the default shell
+				auto_scroll = true, -- automatically scroll to the bottom on terminal output
+				-- This field is only relevant if direction is set to 'float'
+				float_opts = {
+					border = "curved", -- other options supported by win open
+					width = 50,
+					height = 20,
+					winblend = 0,
+				},
+				winbar = {
+					enabled = false,
+					name_formatter = function(term) --  term: Terminal
+						return term.name
+					end,
+				},
+			})
+		end,
+	}
+end
+
+local function treesitter()
+	return {
+		{
+
+			"nvim-treesitter/nvim-treesitter",
+			event = { "BufReadPre", "BufNewFile" },
+			build = ":TSUpdate",
+			config = function()
+				-- import nvim-treesitter plugin
+				local treesitter = require("nvim-treesitter.configs")
+
+				-- configure treesitter
+				treesitter.setup({ -- enable syntax highlighting
+					highlight = {
+						enable = true,
+					},
+					-- enable indentation
+					indent = { enable = true },
+					-- enable autotagging (w/ nvim-ts-autotag plugin)
+					autotag = {
+						enable = true,
+					},
+					-- ensure these language parsers are installed
+					ensure_installed = {
+						"json",
+						"javascript",
+						"typescript",
+						"tsx",
+						"yaml",
+						"html",
+						"css",
+						"prisma",
+						"markdown",
+						"markdown_inline",
+						"svelte",
+						"graphql",
+						"bash",
+						"lua",
+						"vim",
+						"dockerfile",
+						"gitignore",
+						"query",
+						"vimdoc",
+						"c",
+					},
+					incremental_selection = {
+						enable = true,
+						keymaps = {
+							init_selection = "<C-space>",
+							node_incremental = "<C-space>",
+							scope_incremental = false,
+							node_decremental = "<bs>",
+						},
+					},
+				})
+			end,
+		},
+
+		-- Show context of the current function
+		{
+			"nvim-treesitter/nvim-treesitter-context",
+			-- event = "LazyFile",
+			enabled = true,
+			opts = { mode = "cursor", max_lines = 3 },
+			keys = {
+				{
+					"<leader>ut",
+					function()
+						local tsc = require("treesitter-context")
+						tsc.toggle()
+						if LazyVim.inject.get_upvalue(tsc.toggle, "enabled") then
+							LazyVim.info("Enabled Treesitter Context", { title = "Option" })
+						else
+							LazyVim.warn("Disabled Treesitter Context", { title = "Option" })
+						end
+					end,
+					desc = "Toggle Treesitter Context",
+				},
+			},
+		},
+	}
+end
+
 return {
 	colorscheme(),
 	lualine(),
@@ -570,4 +995,11 @@ return {
 	comment(),
 	dressing(),
 	indentation(),
+	nvimTree(),
+	telescope(),
+	web_devicons(),
+	ufo(),
+	todo_comments(),
+	togleterm(),
+	treesitter(),
 }

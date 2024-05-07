@@ -24,6 +24,8 @@
 -- treesitter       | Nvim Treesitter configurations and abstraction layer             |
 -- notify           | A fancy, configurable, notification manager for NeoVim           |
 -- noice_nvim       | replaces the UI for messages, cmdline and the popupmenu.         |
+-- illuminate       | plugin for automatically highlighting other uses of the word     |
+--                  | under the cursor                                                 |
 --_____________________________________________________________________________________|
 
 local function colorscheme()
@@ -712,16 +714,6 @@ local function telescope()
 						},
 					},
 				},
-				-- pickers = {
-				-- 	colorscheme = {
-				-- 		enable_preview = true,
-				-- 	},
-				-- },
-				-- pickers = {
-				-- 	find_files = {
-				-- 		theme = "dropdown",
-				-- 	},
-				-- },
 				extensions = {
 					media_files = {
 						-- filetypes whitelist
@@ -1028,6 +1020,46 @@ local function noice_nvim()
 	}
 end
 
+local function illuminate()
+	return {
+		"RRethy/vim-illuminate",
+		config = function()
+			require("illuminate").configure({
+				-- providers: provider used to get references in the buffer, ordered by priority
+				providers = {
+					"treesitter",
+					"lsp",
+				},
+				-- delay: delay in milliseconds
+				delay = 100,
+				-- filetype_overrides: filetype specific overrides.
+				-- The keys are strings to represent the filetype while the values are tables that
+				-- supports the same keys passed to .configure except for filetypes_denylist and filetypes_allowlist
+				filetype_overrides = {},
+				-- filetypes_denylist: filetypes to not illuminate, this overrides filetypes_allowlist
+				filetypes_denylist = {
+					"dirbuf",
+					"dirvish",
+					"fugitive",
+				},
+				-- under_cursor: whether or not to illuminate under the cursor
+				under_cursor = true,
+				-- large_file_cutoff: number of lines at which to use large_file_config
+				-- The `under_cursor` option is disabled when this cutoff is hit
+				large_file_cutoff = 100,
+				-- large_file_config: config to use for large files (based on large_file_cutoff).
+				-- Supports the same keys passed to .configure
+				-- If nil, vim-illuminate will be disabled for large files.
+				large_file_overrides = nil,
+				-- min_count_to_highlight: minimum number of matches required to perform highlighting
+				min_count_to_highlight = 2,
+				-- case_insensitive_regex: sets regex case sensitivity
+				case_insensitive_regex = false,
+			})
+		end,
+	}
+end
+
 return {
 	colorscheme(),
 	lualine(),
@@ -1045,4 +1077,5 @@ return {
 	treesitter(),
 	notify(),
 	noice_nvim(),
+	illuminate(),
 }

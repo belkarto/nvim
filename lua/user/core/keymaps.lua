@@ -20,9 +20,13 @@ vim.g.maplocalleader = " "
 
 -- Normal --
 -- Better window navigation
+opts.desc = "Move to window on left"
 keymap("n", "<C-h>", "<C-w>h", opts)
+opts.desc = "Move to window on buttom"
 keymap("n", "<C-j>", "<C-w>j", opts)
+opts.desc = "Move to window on top"
 keymap("n", "<C-k>", "<C-w>k", opts)
+opts.desc = "Move to window on right"
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
@@ -54,14 +58,17 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
+opts.desc = "Find file"
 keymap(
 	"n",
-	"<leader>pf",
+	"<leader>tf",
 	"<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
 	opts
 )
-keymap("n", "<leader>tc", "<cmd>lua require'telescope.builtin'.colorscheme({enable_preview = true})<cr>", opts)
-keymap("n", "<leader>ps", "<cmd>Telescope live_grep<cr>", opts)
+opts.desc = "Live grep"
+keymap("n", "<leader>ts", "<cmd>Telescope live_grep<cr>", opts)
+opts.desc = "Live colorscheme changing"
+keymap("n", "<leader>tc", "<cmd>lua require'telescope.builtin'.colorscheme({ enable_preview = true })<cr>", opts)
 
 -- find all matching words and replace them
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

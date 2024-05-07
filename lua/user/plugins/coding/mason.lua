@@ -30,16 +30,10 @@ return {
 				"tsserver",
 				"html",
 				"cssls",
-				"svelte",
 				"lua_ls",
-				"graphql",
-				"emmet_ls",
-				"prismals",
 				"pyright",
 				"clangd",
 				"ast_grep",
-				-- "biome",
-				-- "eslint",
 			},
 		})
 
@@ -47,8 +41,7 @@ return {
 			ensure_installed = {
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
-				-- "isort", -- python formatter
-				"black", -- python formatter
+				-- "black", -- python formatter
 				"ruff",
 			},
 		})

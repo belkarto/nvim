@@ -1078,6 +1078,12 @@ local function trouble()
 	}
 end
 
+local function undotree()
+	return {
+		"mbbill/undotree",
+	}
+end
+
 return {
 	colorscheme(),
 	lualine(),
@@ -1097,4 +1103,5 @@ return {
 	noice_nvim(),
 	illuminate(),
 	trouble(),
+	undotree(),
 }

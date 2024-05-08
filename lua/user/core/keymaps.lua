@@ -1,7 +1,5 @@
 local opts = { noremap = true, silent = true }
 
---[[ local term_opts = { silent = true } ]]
-
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
@@ -18,7 +16,7 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Normal --
+-- INFO: window management
 -- Better window navigation
 opts.desc = "Move to window on left"
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -28,13 +26,14 @@ opts.desc = "Move to window on top"
 keymap("n", "<C-k>", "<C-w>k", opts)
 opts.desc = "Move to window on right"
 keymap("n", "<C-l>", "<C-w>l", opts)
-
--- keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
-
 -- Resize with arrows
+opts.desc = "Resize window"
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
+opts.desc = "Resize window"
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
+opts.desc = "Resize window"
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
+opts.desc = "Resize window"
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Insert --

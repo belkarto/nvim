@@ -26,6 +26,7 @@
 -- noice_nvim       | replaces the UI for messages, cmdline and the popupmenu.         |
 -- illuminate       | plugin for automatically highlighting other uses of the word     |
 --                  | under the cursor                                                 |
+--                  |                                                                  |
 --_____________________________________________________________________________________|
 
 local function colorscheme()
@@ -1104,4 +1105,11 @@ return {
 	illuminate(),
 	trouble(),
 	undotree(),
+	{
+		"RRethy/vim-hexokinase",
+		build = "make hexokinase",
+		config = function()
+			vim.g.Hexokinase_highlighters = { "background" }
+		end,
+	},
 }

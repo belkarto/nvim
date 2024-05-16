@@ -34,6 +34,7 @@ return {
 				"pyright",
 				"clangd",
 				"ast_grep",
+				"eslint",
 			},
 		})
 
@@ -41,8 +42,8 @@ return {
 			ensure_installed = {
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
-				-- "black", -- python formatter
-				"ruff",
+				"black", -- python formatter
+				-- "ruff",
 			},
 		})
 	end,

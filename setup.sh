@@ -169,7 +169,3 @@ if [ $? -ne 0 ]; then
 	echo "PATH+=':$HOME/bin'" >> "$HOME/.zshrc"
 	export PATH+=':$HOME/bin'
 fi
-
-# downloading packer which gonna help to install plugins 
-# !!!note you can download packer manager of your choice 
-git clone -q --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim 2> /dev/null && echo "Packer.nvim [installed]" || echo "Packer [Already exist]"

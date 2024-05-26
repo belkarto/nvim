@@ -16,13 +16,13 @@ source ~/.zshrc
 
 node --version > /dev/null 2>&1 
 if [ $? -ne 0 ]; then
+    nvm install node
+else
     node_version=$(printf '%s\n' "16" $(node -v | cut -d 'v' -f 2) | sort -V | head -n1)
     if [ $node_version != "16" ]; then
         # node version is older that 16
         nvm install node
     fi
-else
-    nvm install node
 fi
 
 # check if you Already have nvim and if not download it 

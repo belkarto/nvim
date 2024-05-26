@@ -1,8 +1,29 @@
-#!/bin/bash
+#!/bin/zsh
+
+source ~/.zshrc
 
 # this line ensures that the $HOME/bin directory exists, and creates it if it does not.
 # and same for nvim and lua and after 
 [[ -d "$HOME/bin" ]] || mkdir "$HOME/bin"
+
+# check nvm if its installed if not install it
+nvm --version > /dev/null 2>&1 
+if [ $? -ne 0 ]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+fi
+
+#install node using nvm to install latest version
+
+node --version > /dev/null 2>&1 
+if [ $? -ne 0 ]; then
+    node_version=$(printf '%s\n' "16" $(node -v | cut -d 'v' -f 2) | sort -V | head -n1)
+    if [ $node_version != "16" ]; then
+        # node version is older that 16
+        nvm install node
+    fi
+else
+    nvm install node
+fi
 
 # check if you Already have nvim and if not download it 
 if [[ $(uname) == "Darwin" ]]; then

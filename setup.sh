@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-source ~/.zshrc
 
 # this line ensures that the $HOME/bin directory exists, and creates it if it does not.
 # and same for nvim and lua and after 
@@ -12,6 +11,7 @@ if [ $? -ne 0 ]; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 fi
 
+source ~/.zshrc
 #install node using nvm to install latest version
 
 node --version > /dev/null 2>&1 

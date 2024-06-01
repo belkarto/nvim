@@ -1,8 +1,29 @@
-#!/bin/bash
+#!/bin/zsh
+
 
 # this line ensures that the $HOME/bin directory exists, and creates it if it does not.
 # and same for nvim and lua and after 
 [[ -d "$HOME/bin" ]] || mkdir "$HOME/bin"
+
+# check nvm if its installed if not install it
+nvm --version > /dev/null 2>&1 
+if [ $? -ne 0 ]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+fi
+
+source ~/.zshrc
+#install node using nvm to install latest version
+
+node --version > /dev/null 2>&1 
+if [ $? -ne 0 ]; then
+    nvm install node
+else
+    node_version=$(printf '%s\n' "16" $(node -v | cut -d 'v' -f 2) | sort -V | head -n1)
+    if [ $node_version != "16" ]; then
+        # node version is older that 16
+        nvm install node
+    fi
+fi
 
 # check if you Already have nvim and if not download it 
 if [[ $(uname) == "Darwin" ]]; then
@@ -70,6 +91,20 @@ if [[ $(uname) == "Darwin" ]]; then
 	tput setaf 2;
 	echo "fd [installed]"
 	tput init;
+
+	# downloading lazygit
+	FILE5="lazygit_0.41.0_Darwin_x86_64.tar.gz"
+	lazygit --version > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		echo "downloading lazygit"
+		curl -# -OL "https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Darwin_x86_64.tar.gz" 
+		tar xzf $FILE5
+		rm $FILE5
+	fi
+
+	tput setaf 2;
+	echo "LazyGit [installed]"
+	tput init;
 else
 	cd "$HOME/bin"
 	FILE="nvim-linux64.tar.gz"
@@ -133,6 +168,20 @@ else
 	tput setaf 2;
 	echo "fd [installed]"
 	tput init;
+
+	# downloading lazygit
+	FILE5="lazygit_0.41.0_Linux_x86_64.tar.gz"
+	lazygit --version > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		echo "downloading LazyGit"
+		curl -# -OL "https://github.com/jesseduffield/lazygit/releases/download/v0.41.0/lazygit_0.41.0_Linux_x86_64.tar.gz" 
+		tar xzf $FILE5
+		rm $FILE5
+	fi
+
+	tput setaf 2;
+	echo "LazyGit [installed]"
+	tput init;
 fi
 
 # add bin to PATH 
@@ -141,7 +190,3 @@ if [ $? -ne 0 ]; then
 	echo "PATH+=':$HOME/bin'" >> "$HOME/.zshrc"
 	export PATH+=':$HOME/bin'
 fi
-
-# downloading packer which gonna help to install plugins 
-# !!!note you can download packer manager of your choice 
-git clone -q --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim 2> /dev/null && echo "Packer.nvim [installed]" || echo "Packer [Already exist]"

@@ -1,7 +1,5 @@
 local opts = { noremap = true, silent = true }
 
---[[ local term_opts = { silent = true } ]]
-
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
@@ -18,40 +16,25 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Normal --
+-- INFO: window management
 -- Better window navigation
+opts.desc = "Move to window on left"
 keymap("n", "<C-h>", "<C-w>h", opts)
+opts.desc = "Move to window on buttom"
 keymap("n", "<C-j>", "<C-w>j", opts)
+opts.desc = "Move to window on top"
 keymap("n", "<C-k>", "<C-w>k", opts)
+opts.desc = "Move to window on right"
 keymap("n", "<C-l>", "<C-w>l", opts)
-
-keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
-
 -- Resize with arrows
+opts.desc = "Resize window"
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
+opts.desc = "Resize window"
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
+opts.desc = "Resize window"
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
+opts.desc = "Resize window"
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
-
-
--- Move to previous/next
-keymap('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
-keymap('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
--- Goto buffer in position...
-keymap('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
-keymap('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
-keymap('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
-keymap('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
-keymap('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
-keymap('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
-keymap('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
-keymap('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
-keymap('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
-keymap('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
--- Pin/unpin buffer
-keymap('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
--- Close buffer
-keymap('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
 
 -- Insert --
 -- Press jk fast to enter
@@ -74,15 +57,17 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
-
-keymap("n", "<leader>pf",
-    "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
-    opts)
-keymap("n", "<leader>ps", "<cmd>Telescope live_grep<cr>", opts)
--- format file
-vim.keymap.set("n", "<leader>f", "<cmd>LspZeroFormat<cr>")
---toggle twilight to focus only in current function or scoop
-keymap("n", "<C-f>", "<cmd>Twilight<cr>", opts)
+opts.desc = "Find file"
+keymap(
+	"n",
+	"<leader>tf",
+	"<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>",
+	opts
+)
+opts.desc = "Live grep"
+keymap("n", "<leader>ts", "<cmd>Telescope live_grep<cr>", opts)
+opts.desc = "Live colorscheme changing"
+keymap("n", "<leader>tc", "<cmd>lua require'telescope.builtin'.colorscheme({ enable_preview = true })<cr>", opts)
 
 -- find all matching words and replace them
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -90,6 +75,5 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- clear all search highlight
 keymap("n", "<leader>c", "<cmd>noh<cr>", opts)
-vim.keymap.set("n", "<leader>t", vim.cmd.TransparentToggle)
 
 vim.keymap.set("n", "<leader>dd", "<cmd>packadd termdebug<cr><cmd>Termdebug<cr><C-w>k<C-w>k<C-w>L<C-w>h<C-w>j", opts)

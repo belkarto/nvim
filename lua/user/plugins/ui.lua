@@ -63,11 +63,13 @@ local function colorscheme()
 			config = function()
 				require("gruvbox").setup(opt)
 				vim.cmd("set background=dark")
-				vim.cmd("colorscheme gruvbox")
 			end,
 		},
 		{
 			"oxfist/night-owl.nvim",
+		},
+		{
+			"navarasu/onedark.nvim",
 		},
 		{
 			"/rebelot/kanagawa.nvim",

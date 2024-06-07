@@ -3,3 +3,4 @@
 -- pcall(require, "user.lazy")
 require("user.core")
 require("user.lazy")
+vim.cmd("colorscheme gruvbox")

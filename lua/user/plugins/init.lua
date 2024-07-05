@@ -43,8 +43,4 @@ return {
 		-- INFO: noice
 		"MunifTanjim/nui.nvim",
 	},
-	{
-		-- TODO: just testing
-		"ThePrimeagen/vim-be-good",
-	},
 }

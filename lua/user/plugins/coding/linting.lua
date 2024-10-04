@@ -6,7 +6,7 @@ return {
 
 		lint.linters_by_ft = {
 			javascript = {},
-			typescript = { "eslint_d" },
+			typescript = {},
 			javascriptreact = { "eslint_d" },
 			typescriptreact = { "eslint_d" },
 			-- python = { "ruff" },

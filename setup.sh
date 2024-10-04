@@ -32,7 +32,7 @@ if [[ $(uname) == "Darwin" ]]; then
 	nvim --version > /dev/null 2>&1
 	if [ $? -ne 0 ]; then
 		echo "downloading nvim..."
-		curl -# -OL 'https://github.com/neovim/neovim/releases/download/v0.9.1/nvim-macos.tar.gz'
+		curl -# -OL 'https://github.com/neovim/neovim/releases/download/v0.10.1/nvim-macos.tar.gz'
 		tar xzf nvim-macos.tar.gz
 		rm $FILE
 		ln -s nvim-macos/bin/nvim nvim
